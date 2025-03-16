@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Surprise For You! 🎀</title>
+    
+    <style>
+        body {
+            text-align: center;
+            background: linear-gradient(to bottom, #ffccff, #ff99cc);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: white;
+            font-size: 40px;
+            text-shadow: 2px 2px 5px #ff0066;
+            margin-top: 50px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message {
+            font-size: 22px;
+            color: #660033;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 3s forwards 2s;
+        }
+
+        .gift {
+            width: 150px;
+            margin-top: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            opacity: 0;
+            animation: fadeIn 2s forwards 4s;
+        }
+
+        .gift:hover {
+            transform: scale(1.1);
+        }
+
+        .hidden-message {
+            display: none;
+            font-size: 24px;
+            color: #ff0066;
+            margin-top: 20px;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        .btn-container {
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #ff3399;
+            color: white;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 2px 2px 10px #cc0052;
+            animation: bounce 1.5s infinite alternate;
+            margin: 10px;
+            opacity: 0;
+            animation: fadeIn 2s forwards 5s;
+        }
+
+        .btn:hover {
+            background: #cc0052;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: red;
+            opacity: 0.8;
+            border-radius: 50%;
+            animation: fall 5s infinite linear;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎉 A Special Surprise for You! 💖</h1>
+    <p class="message">I just want to say thank you for being the most beautiful part of my life! 💕</p>
+
+    <!-- Clickable Gift Image -->
+    <img src="gift.png" alt="Gift" class="gift" onclick="revealSurprise()">
+
+    <!-- Hidden Surprise Message -->
+    <p id="hidden-message" class="hidden-message">I love you forever! 💖</p>
+
+    <div class="btn-container">
+        <a href="home.html" class="btn">⬅ Back to Memories 📸</a>
+        <a href="index.html" class="btn">💌 Read the Love Letter Again 💖</a>
+    </div>
+
+    <script>
+        function revealSurprise() {
+            document.getElementById("hidden-message").style.display = "block";
+        }
+
+        function createConfetti() {
+            setInterval(() => {
+                let confetti = document.createElement("div");
+                confetti.className = "confetti";
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.background = ["#ff66b2", "#ffccff", "#ff3399", "#ff6699", "#ff99cc"][Math.floor(Math.random() * 5)];
+                confetti.style.animationDuration = (Math.random() * 3 + 3) + "s";
+                confetti.style.width = confetti.style.height = Math.random() * 10 + "px";
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }, 300);
+        }
+
+        createConfetti();
+    </script>
+
+</body>
+</html>

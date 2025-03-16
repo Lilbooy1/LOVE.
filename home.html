@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📸 Our Sweet Memories 🎀</title>
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <style>
+        /* Smooth Page Transitions */
+        body {
+            opacity: 0;
+            animation: fade-in 1s ease-in-out forwards;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body.fade-out {
+            animation: fade-out 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fade-out {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        body {
+            text-align: center;
+            background: linear-gradient(to bottom, #ffccff, #ff99cc);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1 {
+            color: white;
+            font-size: 38px;
+            text-shadow: 2px 2px 5px #ff0066;
+            margin-top: 20px;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 10px #ff0066; }
+            to { text-shadow: 2px 2px 20px #ff3399; }
+        }
+
+        /* Swiper Container */
+        .swiper-container {
+            width: 90%;
+            max-width: 450px;
+            height: 500px;
+            margin: auto;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Stylish Card Effect */
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            position: relative;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .swiper-slide:hover {
+            transform: scale(1.05);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3);
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        /* Swiper Navigation */
+        .swiper-button-next, .swiper-button-prev {
+            color: #ff3399 !important;
+        }
+
+        /* Swiper Pagination */
+        .swiper-pagination-bullet {
+            background: #ff66b2 !important;
+        }
+
+        /* Navigation Buttons */
+        .btn-container {
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #ff3399;
+            color: white;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 3px 3px 12px #cc0052;
+            transition: transform 0.2s ease-in-out;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            background: #cc0052;
+        }
+
+        /* Lightbox Styling */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📸 Our Sweet Memories 🎀</h1>
+
+    <!-- Swiper Container -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="memory1.jpg" alt="Memory 1" class="clickable"></div>
+            <div class="swiper-slide"><img src="memory2.jpg" alt="Memory 2" class="clickable"></div>
+            <div class="swiper-slide"><img src="memory3.jpg" alt="Memory 3" class="clickable"></div>
+            <div class="swiper-slide"><img src="memory4.jpg" alt="Memory 4" class="clickable"></div>
+            <div class="swiper-slide"><img src="memory5.jpg" alt="Memory 5" class="clickable"></div>
+            <div class="swiper-slide"><img src="memory6.jpg" alt="Memory 6" class="clickable"></div>
+            <div class="swiper-slide"><img src="memory7.jpg" alt="Memory 7" class="clickable"></div>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+    <div class="btn-container">
+        <a href="index.html" class="btn">⬅ Kembali ke Surat 💌</a>
+        <a href="about.html" class="btn">🎉 Lanjut ke Kejutan! ➜</a>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">✖</span>
+        <img id="lightbox-img" src="">
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            loop: true,
+            spaceBetween: 15,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            effect: 'fade',
+            fadeEffect: { crossFade: true },
+            autoplay: { delay: 2500, disableOnInteraction: false }
+        });
+
+        // Smooth Page Transitions
+        document.addEventListener("DOMContentLoaded", function() {
+            const links = document.querySelectorAll("a");
+
+            links.forEach(link => {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    let href = this.href;
+                    document.body.classList.add("fade-out");
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 500);
+                });
+            });
+        });
+
+        // Lightbox Functionality
+        const images = document.querySelectorAll(".clickable");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+
+        images.forEach(image => {
+            image.addEventListener("click", function() {
+                lightboxImg.src = this.src;
+                lightbox.classList.add("active");
+            });
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove("active");
+        }
+    </script>
+
+</body>
+</html><!--  -->
